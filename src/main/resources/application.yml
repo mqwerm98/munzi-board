@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/munzi/board
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug # debug로 sql이 찍힌다
+    org.hibernate.type: trace # sql param binding 정보를 보여준다
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
