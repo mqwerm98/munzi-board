@@ -24,8 +24,6 @@ public class Board {
 
     private String content;
 
-    private Long views;
-
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -40,9 +38,11 @@ public class Board {
 
     public void changeTitle(String title) {
         this.title = title;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void changeContent(String content) {
         this.content = content;
+        this.updatedAt = LocalDateTime.now();
     }
 }

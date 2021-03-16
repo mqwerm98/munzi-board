@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor
-@ToString(of = "value")
 public enum Gender {
     M("Male"),
     F("Female");

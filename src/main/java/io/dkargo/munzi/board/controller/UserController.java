@@ -20,6 +20,7 @@ public class UserController {
 
     @PostMapping("")
     public ResponseEntity<ResCreateUserDto> createUser(@Validated @RequestBody ReqCreateUserDto dto) {
+        // TODO : controller에서 사용한 dto는 service용으로 따로 생성해서 주고 받도록 하자!
         ResCreateUserDto result = userService.createUser(dto);
         return ResponseEntity.ok(result);
     }

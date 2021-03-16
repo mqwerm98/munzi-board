@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,9 +24,12 @@ public class User {
 
     private String nickname;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Convert(converter = GenderConverter.class)
     private Gender gender;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList = new ArrayList<>();
 
     private LocalDateTime createdAt;
 
@@ -40,5 +45,6 @@ public class User {
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
+        this.updatedAt = LocalDateTime.now();
     }
 }

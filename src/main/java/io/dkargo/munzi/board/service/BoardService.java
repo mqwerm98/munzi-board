@@ -25,7 +25,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
-    
     public ResCreateBoardDto createBoard(ReqCreateBoardDto dto) {
         User user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new DkargoException(ErrorCode.USER_NOT_FOUND));
@@ -58,6 +57,7 @@ public class BoardService {
                 .orElseThrow(() -> new DkargoException(ErrorCode.BOARD_NOT_FOUND));
 
         board.changeTitle(dto.getTitle());
+        board.changeContent(dto.getContent());
 
         return true;
     }
