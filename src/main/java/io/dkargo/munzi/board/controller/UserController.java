@@ -7,6 +7,7 @@ import io.dkargo.munzi.board.dto.response.ResGetUserDetailDto;
 import io.dkargo.munzi.board.dto.response.ResGetUserListDto;
 import io.dkargo.munzi.board.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResCreateUserDto> createUser(@Validated @RequestBody ReqCreateUserDto dto) {
         // TODO : controller에서 사용한 dto는 service용으로 따로 생성해서 주고 받도록 하자!
         ResCreateUserDto result = userService.createUser(dto);
@@ -26,20 +28,20 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<ResGetUserListDto> getUserList(@RequestParam("page") int page, @RequestParam("size") int size) {
-        ResGetUserListDto result = userService.getUserList(page, size);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public ResGetUserListDto getUserList(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return userService.getUserList(page, size);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<ResGetUserDetailDto> getUserDetail(@PathVariable("userId") long userId) {
-        ResGetUserDetailDto result = userService.getUserDetail(userId);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public ResGetUserDetailDto getUserDetail(@PathVariable("userId") long userId) {
+        return userService.getUserDetail(userId);
     }
 
     @PatchMapping("")
-    public ResponseEntity<Boolean> updateUser(@Validated @RequestBody ReqUpdateUserDto dto) {
-        boolean result = userService.updateUser(dto);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean updateUser(@Validated @RequestBody ReqUpdateUserDto dto) {
+        return userService.updateUser(dto);
     }
 }

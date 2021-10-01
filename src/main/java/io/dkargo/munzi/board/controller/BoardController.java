@@ -7,6 +7,7 @@ import io.dkargo.munzi.board.dto.request.ReqUpdateUserDto;
 import io.dkargo.munzi.board.dto.response.*;
 import io.dkargo.munzi.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,27 +20,27 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("")
-    public ResponseEntity<ResCreateBoardDto> createBoard(@Validated @RequestBody ReqCreateBoardDto dto) {
-        ResCreateBoardDto result = boardService.createBoard(dto);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResCreateBoardDto createBoard(@Validated @RequestBody ReqCreateBoardDto dto) {
+        return boardService.createBoard(dto);
     }
 
     @GetMapping("")
-    public ResponseEntity<ResGetBoardListDto> getBoardList(@RequestParam("page") int page, @RequestParam("size") int size) {
-        ResGetBoardListDto result = boardService.getBoardList(page, size);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public ResGetBoardListDto getBoardList(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return boardService.getBoardList(page, size);
     }
 
     @GetMapping("/{boardId}")
-    public ResponseEntity<ResGetBoardDetailDto> getBoardDetail(@PathVariable("boardId") long userId) {
-        ResGetBoardDetailDto result = boardService.getBoardDetail(userId);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public ResGetBoardDetailDto getBoardDetail(@PathVariable("boardId") long userId) {
+        return boardService.getBoardDetail(userId);
     }
 
     @PatchMapping("")
-    public ResponseEntity<Boolean> updateBoard(@Validated @RequestBody ReqUpdateBoardDto dto) {
-        boolean result = boardService.updateBoard(dto);
-        return ResponseEntity.ok(result);
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean updateBoard(@Validated @RequestBody ReqUpdateBoardDto dto) {
+        return boardService.updateBoard(dto);
     }
 
 }
