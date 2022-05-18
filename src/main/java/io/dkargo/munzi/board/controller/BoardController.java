@@ -33,8 +33,8 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResGetBoardDetailDto getBoardDetail(@PathVariable("boardId") long userId) {
-        return boardService.getBoardDetail(userId);
+    public ResGetBoardDetailDto getBoardDetail(@PathVariable("boardId") long boardId) {
+        return boardService.getBoardDetail(boardId);
     }
 
     @PatchMapping("")
